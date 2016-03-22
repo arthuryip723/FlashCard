@@ -1,1 +1,6 @@
 <%= @deck.name %>
+<ul>
+  <% @deck.cards.each do |card| %>
+    <li><%= card.front %><br><%= card.back %></li>
+  <% end %>
+</ul>

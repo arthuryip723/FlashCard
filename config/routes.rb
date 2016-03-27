@@ -54,5 +54,10 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-  resources :decks
+  resources :decks do
+    # get :poll, on: :member
+    # get 'poll' => 'decks#poll', on: :member
+    # get 'poll', on: :member
+    get 'poll' => 'decks#next', on: :member
+  end
 end

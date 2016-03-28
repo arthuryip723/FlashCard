@@ -54,10 +54,14 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
+  root to: "static_pages#root"
   resources :decks do
-    # get :poll, on: :member
     # get 'poll' => 'decks#poll', on: :member
     # get 'poll', on: :member
-    get 'poll' => 'decks#next', on: :member
+    # Try to use the nested resources for showing the cards
+
+    # get :poll, on: :member
+    # post 'poll' => 'decks#next', on: :member
+    match 'poll', to: 'decks#poll', via: [:get, :post], on: :member
   end
 end

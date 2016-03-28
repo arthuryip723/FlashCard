@@ -2,4 +2,12 @@
 <%= @card.front %>
 <br>
 <%= @card.back %>
+<!-- Here I should probabaly write my own forms for the post action. -->
+<%= button_to "Again", action: "poll" ,params: {'card_id' => "#{@card.id}", 'state' => 'AGAIN'} %>
+<%= button_to "Good", action: "poll" ,params: {'card_id' => "#{@card.id}", 'state' => 'GOOD'} %>
+<%= button_to "Easy", action: "poll" ,params: {'card_id' => "#{@card.id}", 'state' => 'EASY'} %>
+<%= poll_deck_path 1 %>
+<%= poll_deck_path 'name', 'title', 'param2' %>
+<br>
+<%= @method %>
 <!-- Make two buttons here for next -->

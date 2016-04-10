@@ -14,5 +14,11 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require angular
-//= require flash_card
+//= require angular-route
+//= require angular-resource
+//= require angular-rails-templates
+// Templates in app/assets/javascript/templates
+//= require_tree ./templates
+//= require app
+//= require controllers
 //= require_tree .

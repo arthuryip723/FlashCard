@@ -1,1 +1,1 @@
-alert("hello, flash card!");
+// alert("hello, flash card!");

@@ -1,0 +1,8 @@
+<form action="<%= deck_cards_path %>" method="post">
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+	<label>Front</label>
+	<input type="text" name="card[front]">
+	<label>Back</label>
+	<input type="text" name="card[back]">
+	<button>Submit</button>
+</form>

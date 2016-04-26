@@ -4,7 +4,11 @@ class DecksController < ApplicationController
   end
 
   def show
-  	@deck = Deck.find(params[:id])
+  	@deck = Deck.includes(:cards).find(params[:id])
+    @cards = @deck.cards
+    @again_cards = @cards.select{|card| card.state == 'AGAIN'}
+    @good_cards = @cards.select{|card| card.state == 'GOOD'}
+    @easy_cards = @cards.select{|card| card.state == 'EASY'}
   end
 
   # This method is used for polling the card
@@ -33,25 +37,29 @@ class DecksController < ApplicationController
       @card = poll_a_new_card(params[:id])
     elsif request.post?
       next_poll
+      # if all cards are marked easy, round is finished.
     end
   end
+  
+  def create
+  end
 
+  private
+  def deck_params
+    params.require(:deck).permit()
+  end
+  
   def next_poll
     # 1, First get the card
     @card = Card.find(params[:card_id])
     # 2, Then set the card to a certain state
     # How do I get the state?
     # @card.update(state: 'GOOD')
-    @card.update(state: params[:state])
+    @card.update(state: params[:state], updated_at: DateTime.now)
     # 3, Poll another card
     @card = poll_a_new_card(params[:id])
     @deck = Deck.find(params[:id])
     # render :poll
-  end
-
-  private
-  def deck_params
-    params.require(:deck).permit()
   end
 
   def poll_a_new_card(deck_id)
@@ -63,9 +71,9 @@ class DecksController < ApplicationController
     if !card
       card = deck.cards.where(state: 'GOOD').order(:updated_at).first
     end
-    if !card
-      card = deck.cards.where(state: 'EASY').order(:updated_at).first
-    end
+    # if !card
+    #   card = deck.cards.where(state: 'EASY').order(:updated_at).first
+    # end
     card
   end
 end

@@ -63,5 +63,6 @@ Rails.application.routes.draw do
     # get :poll, on: :member
     # post 'poll' => 'decks#next', on: :member
     match 'poll', to: 'decks#poll', via: [:get, :post], on: :member
+    resources :cards, on: :member
   end
 end

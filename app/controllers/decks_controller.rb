@@ -2,6 +2,10 @@ class DecksController < ApplicationController
   def index
     @decks = Deck.all
   end
+  
+  def new
+    @deck = Deck.new
+  end
 
   def show
   	@deck = Deck.includes(:cards).find(params[:id])
@@ -42,11 +46,17 @@ class DecksController < ApplicationController
   end
   
   def create
+    @deck = Deck.new(deck_params)
+    if @deck.save
+      redirect_to @deck
+    else
+      render 'new'
+    end
   end
 
   private
   def deck_params
-    params.require(:deck).permit()
+    params.require(:deck).permit(:name)
   end
   
   def next_poll

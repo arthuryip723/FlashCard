@@ -7,6 +7,12 @@
 again cards<br>
 <ul>
   <% @again_cards.each do |card| %>
-  	<li><%= card.front %><br><%= card.back%></li>
+  	<li><%= card.front %><br><%= card.back %></li>
+  <% end %>
+</ul>
+easy cards<br>
+<ul>
+  <% @easy_cards.each do |card| %>
+  <li><%= card.front %><br><%= card.back %></li>
   <% end %>
 </ul>

@@ -18,8 +18,23 @@ class CardsController < ApplicationController
     @card = Card.find(params[:id])
   end
   
+  def edit
+    @card = Card.find(params[:id])
+    @decks = Deck.all
+  end
+  
+  def update
+    @card = Card.find(params[:id])
+    if @card.update_attributes(card_params)
+      # redirect_to @card
+      redirect_to deck_card_path @card.deck, @card
+    else
+      render 'edit'
+    end
+  end
+  
   private
   def card_params
-    params.require(:card).permit(:front, :back)
+    params.require(:card).permit(:front, :back, :deck_id)
   end
 end

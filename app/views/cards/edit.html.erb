@@ -1,0 +1,8 @@
+<%= form_for @card, url: deck_card_path(@card.deck, @card), method: :patch do |f| %>
+	<%= f.label :front %>
+	<%= f.text_field :front %>
+	<%= f.label :back %>
+	<%= f.text_field :back %>
+	<%= select 'card', 'deck_id', @decks.map{|deck| [deck.name, deck.id]} %>
+	<%= f.submit 'Submit' %>
+<% end %>
